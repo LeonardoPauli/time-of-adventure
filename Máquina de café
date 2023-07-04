@@ -1,0 +1,453 @@
+#Bibliotecas utlizadas:
+import datetime
+import pytz
+import time 
+
+#Vetores e variável
+#____________________________________________
+#Conteinars 
+pos = ['CAFÉ','LEITE','CHOCOLATE','AÇÚCAR']
+containers = [20, 20, 20, 20]
+
+#Doses de pós
+dose_grande_cafe = [2, 0, 0, 0]
+dose_pequena_cafe = [1, 0, 0, 0]
+dose_grande_leite = [0, 2, 0, 0]
+dose_pequena_leite = [0, 1, 0, 0]
+dose_grande_chocolate = [0, 0, 2, 0]
+dose_pequena_chocolate = [0, 0, 1, 0]
+dose_grande_acucar = [0, 0, 0, 2]
+dose_pequena_acucar = [0, 0, 0, 1]
+
+#Reabastecimento de pós
+reab_cafe = [20, 0, 0, 0]
+reab_leite = [0, 20, 0, 0]
+reab_chocolate = [0, 0, 20, 0]
+reab_acucar = [0, 0, 0, 20]
+
+#Variável que determina o número do cupom
+numero_cupom = 1
+#___________________________________________
+
+
+#Funções :
+#_________________________________
+#Função que mostra os containers
+def mostrar_containers():
+    print('\n')
+    x = input('Deseja visualizar os containers? (s-sim n-não) ')
+    if x=='s':
+        print(f'Quantidades atualizadas dos containers:{containers}')
+    
+#Função timer
+def tempo(t):
+    time.sleep(t)
+
+#Função que prepara a bebida
+def preparar_bebida():
+    #Estrutura interna da máquina
+    if bebida == 1:
+        if tamanho == 'g':
+            for i in range(len(containers)):
+                if containers[i] < dose_grande_cafe[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_cafe[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                containers[i] -= dose_grande_cafe[i]
+            else:
+                if ad_acucar == 's':
+                    for i in range(len(containers)):
+                        if containers[i] < dose_grande_acucar[i]:
+                            while (True):
+                                print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                                reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                                if reab =='s':
+                                    containers[i] += reab_acucar[i]
+                                    tempo(2)
+                                    break
+                                if reab =='n':
+                                    continue
+                        containers[i] -= dose_grande_acucar[i]
+    
+        elif tamanho == 'p':
+            for i in range(len(containers)):
+                if containers[i] < dose_pequena_cafe[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_cafe[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                containers[i] -= dose_pequena_cafe[i]
+            else:
+                if ad_acucar == 's':
+                    for i in range(len(containers)):
+                        if containers[i] < dose_pequena_acucar[i]:
+                            while (True):
+                                print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                                reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                                if reab =='s':
+                                    containers[i] += reab_acucar[i]
+                                    tempo(2)
+                                    break
+                                if reab =='n':
+                                    continue
+                        containers[i] -= dose_pequena_acucar[i]
+    
+    elif bebida == 2:
+        if tamanho == 'g':
+            for i in range(len(containers)):
+                if containers[i] < dose_grande_cafe[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_cafe[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                        
+                if containers[i] < dose_grande_leite[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_leite[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                containers[i] -= dose_grande_cafe[i] + dose_grande_leite[i]
+            else:
+                if ad_acucar == 's':
+                    for i in range(len(containers)):
+                        if containers[i] < dose_grande_acucar[i]:
+                            while (True):
+                                print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                                reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                                if reab =='s':
+                                    containers[i] += reab_acucar[i]
+                                    tempo(2)
+                                    break
+                                if reab =='n':
+                                    continue
+                        containers[i] -= dose_grande_acucar[i]
+    
+        elif tamanho == 'p':
+            for i in range(len(containers)):
+                if containers[i] < dose_pequena_cafe[i]:  
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_cafe[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                        
+                if containers[i] < dose_pequena_leite[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_leite[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                containers[i] -= dose_pequena_cafe[i] + dose_pequena_leite[i]
+            
+            else:
+                if ad_acucar == 's':
+                    for i in range(len(containers)):
+                        if containers[i] < dose_pequena_acucar[i]:
+                            while (True):
+                                print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                                reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                                if reab =='s':
+                                    containers[i] += reab_acucar[i]
+                                    tempo(2)
+                                    break
+                                if reab =='n':
+                                    continue
+                        containers[i] -= dose_pequena_acucar[i]
+    
+    elif bebida == 3:
+        if tamanho == 'g':
+            for i in range(len(containers)):
+                if containers[i] < dose_grande_cafe[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_cafe[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                if containers[i] < dose_grande_leite[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_leite[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                if containers[i] < dose_grande_chocolate[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_chocolate[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                containers[i] -= dose_grande_cafe[i] + dose_grande_leite[i] + dose_grande_chocolate[i]
+            else:
+                if ad_acucar == 's':
+                    for i in range(len(containers)):
+                        if containers[i] < dose_grande_acucar[i]:
+                            while (True):
+                                print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                                reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                                if reab =='s':
+                                    containers[i] += reab_acucar[i]
+                                    tempo(2)
+                                    break
+                                if reab =='n':
+                                    continue
+                        containers[i] -= dose_grande_acucar[i]
+    
+        elif tamanho == 'p':
+            for i in range(len(containers)):
+                if containers[i] < dose_pequena_cafe[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio! Reabasteça para liberar preparação de bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_cafe[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                if containers[i] < dose_pequena_leite[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio. Reabasteça antes de preparar bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_leite[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                if containers[i] < dose_pequena_chocolate[i]:
+                    while (True):
+                        print(f'Container de {pos[i]} vazio. Reabasteça antes de preparar bebidas.')
+                        reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                        if reab =='s':
+                            containers[i] += reab_chocolate[i]
+                            tempo(2)
+                            break
+                        if reab =='n':
+                            continue
+                containers[i] -= dose_pequena_cafe[i] + dose_pequena_leite[i] + dose_pequena_chocolate[i]
+            else:
+                if ad_acucar == 's':
+                    for i in range(len(containers)):
+                        if containers[i] < dose_pequena_acucar[i]:
+                            while (True):
+                                print(f'Container de {pos[i]} vazio. Reabasteça antes de preparar bebidas.')
+                                reab = input(f'O container de {pos[i]} já foi reabastecido?(s=sim / n=não)\n' )
+                                if reab =='s':
+                                    containers[i] += reab_acucar[i]
+                                    tempo(2)
+                                    break
+                                if reab =='n':
+                                    continue
+                        containers[i] -= dose_pequena_acucar[i]
+                    
+    print('Aguarde por favor, sua bebida está sendo preparada!') 
+
+#Função que gera o cupom fiscal do pedido 
+def gerar_cupom_fiscal(numero_cupom):
+    #Data e horário atuais
+    data_hora_local = datetime.datetime.now()
+    data_hora_brasilia = data_hora_local.astimezone(pytz.timezone('America/Sao_Paulo'))
+    data = data_hora_brasilia.strftime('%d/%m/%Y')
+    hora = data_hora_brasilia.strftime('%H:%M:%S')
+    data_hora = [data, '\t', hora]
+    
+    #Variáveis de endereço
+    nome_cafeteria = 'Nome cafeteria'
+    rua_cafeteria = 'Rua cafeteria'
+    bairro_cafeteria = 'Bairro: *******  CEP:*******'
+    telefone_cafeteria = 'Fone: (**) ****-****'
+    cnpj_cafeteria = 'CNPJ: **.***.***|****-**'
+    
+    #Gerador e estrutura do cupom fiscal
+    arquivo = open(f'cupom_fiscal_{numero_cupom}.txt','w')
+    arquivo.write(f'       #        \n')
+    arquivo.write(f'      ##        \n')
+    arquivo.write(f'      ###       \n')
+    arquivo.write(f'     ______     \t  {nome_cafeteria}\n')
+    arquivo.write(f'    |______|_   \t  {rua_cafeteria} \n' )
+    arquivo.write(f'    |      |_|  \t  {bairro_cafeteria}\n')
+    arquivo.write(f'    |______|    \t  {telefone_cafeteria}\n')
+    arquivo.write(f'                \t  {cnpj_cafeteria}\n')
+    arquivo.write(f'__________________________________________________\n')
+    arquivo.write(f'Cupom Fiscal Número: {numero_cupom}\n')
+    arquivo.writelines(data_hora)
+    arquivo.write(f'\nCNPJ/CPF consumidor:\n')
+    arquivo.write(f'NOME:\n')
+    arquivo.write(f'END:\n')
+    arquivo.write('\n')
+    arquivo.write(f'                 CUPOM FISCAL\n')
+    arquivo.write(f'ITEM      TAM.     AÇÚCAR               VL ITEM R$\n')
+    arquivo.write(f'__________________________________________________\n')
+    arquivo.write('\n')
+    arquivo.write(f'{bebida_pedida}  {tamanho_pedido}   {acucar}            {valor_item:.2f}\n')
+    arquivo.write('\n')
+    arquivo.write('\n')
+    arquivo.write(f'                   _______________________________\n')
+    arquivo.write('\n')
+    arquivo.write(f'TOTAL R$                                      {valor_item:.2f}\n')
+    arquivo.write('\n')
+    arquivo.write('\n')
+    arquivo.write('\n')
+    arquivo.write('\n')
+    arquivo.write('Obrigado, volte sempre!\n')
+    arquivo.write(f'__________________________________________________\n')
+#_________________________________
+
+
+#While de funcionamento completo da máquina 
+while True:    
+    
+    #while do pedido e entrega 
+    while True:
+        
+        #Entrda da máquina / pedido
+        bebida = int(input('Olá você pode escolher entre três tipos de bebidas: \n1-Café puro \n2-Café com leite \n3-Mochaccino \nQual será? '))
+        print("\n")
+        if bebida ==778899:
+            break
+        tamanho = input('Agora, escolha o tamanho: \ng-copo grande \np-copo pequeno \nQual o tamanho? ')
+        print("\n")
+        ad_acucar = input('Açúcar: \ns-sim \nn-não \nDeve-se adicionar? ')
+        
+        #Ajuste dos tempos para a preparação da bebida
+        tempo_bebida=0
+        
+        if bebida==1:
+            bebida_pedida = 'café puro  '
+            valor_item = 3.00
+            if tamanho=='g':
+                tamanho_pedido = 'grande '
+                valor_item += 1.00
+                tempo_bebida = 12
+                if ad_acucar=='s':
+                    acucar = 'com açúcar '
+                    valor_item += 1.00
+                    tempo_bebida+=2
+                if ad_acucar=='n':
+                    acucar = 'sem açúcar '
+            if tamanho=='p':
+                tamanho_pedido = 'pequeno'
+                tempo_bebida = 6
+                if ad_acucar=='s':
+                    acucar = 'com açúcar '
+                    valor_item += 1.00
+                    tempo_bebida+=1
+                if ad_acucar=='n':
+                    acucar = 'sem açúcar '
+        if bebida==2:
+            bebida_pedida = 'café c/leite'
+            valor_item = 3.50
+            if tamanho=='g':
+                tamanho_pedido = ' grande'
+                valor_item += 1.00
+                tempo_bebida = 14
+                if ad_acucar=='s':
+                    acucar = 'com açúcar'
+                    valor_item += 1.00
+                    tempo_bebida+=2
+                if ad_acucar=='n':
+                    acucar = 'sem açúcar'
+            if tamanho=='p':
+                tamanho_pedido = 'pequeno'
+                tempo_bebida = 7
+                if ad_acucar=='s':
+                    acucar = 'com açúcar'
+                    valor_item += 1.00
+                    tempo_bebida+=1
+                if ad_acucar=='n':
+                    acucar = 'sem açúcar'
+        if bebida==3:
+            bebida_pedida = 'mochaccino '
+            valor_item = 4.50
+            if tamanho=='g':
+                tamanho_pedido = 'grande '
+                valor_item += 1.00
+                tempo_bebida = 16
+                if ad_acucar=='s':
+                    acucar = 'com açúcar '
+                    valor_item += 1.00
+                    tempo_bebida+=2
+                if ad_acucar=='n':
+                    acucar = 'sem açúcar '
+            if tamanho=='p':
+                tamanho_pedido = 'pequeno'
+                tempo_bebida = 8
+                if ad_acucar=='s':
+                    acucar = 'com açúcar '
+                    valor_item += 1.00
+                    tempo_bebida+=1
+                if ad_acucar=='n':
+                    acucar = 'sem açúcar '
+                    
+        print('\033c', end='')
+        print(f'A bebida escolhida foi um {bebida_pedida} {tamanho_pedido} {acucar}')
+        verif = input('O pedido está correto? (s-sim / n-não)\n')
+        if verif=='n':
+            print('\033c', end='')
+            True
+        if verif=='s':    
+            print('\033c', end='')
+            preparar_bebida()
+            gerar_cupom_fiscal(numero_cupom)
+            numero_cupom += 1
+            tempo(tempo_bebida)             
+            print('\033c', end='')
+            print('Sua bebida está pronta, agora você pode retirá-la.')
+            print('\n')
+            tempo(6)
+            print('\033c', end='')
+    
+    print('\033c', end='')
+    print('A máquina está inativa!')
+    mostrar_containers()
+    print('\n')
+    z = input('Para retomar funcionamento normal digite on e para desligar completamente digite off: ')
+    if z == 'off':
+        break
+    if z =='on':
+        True 
+
+#Desligamento da máquina
+print('\nA máquina está sendo desligada...')    
+tempo(10)
+print('Máquina desligada')
